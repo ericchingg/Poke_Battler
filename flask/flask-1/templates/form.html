@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for msg in get_flashed_messages() %}
+<b>{{ msg }}</b>
+{% endfor %}
+
+<form action="/results">
+  <p> From Currency <input name="from"></p>
+  <p> To Currency <input name="to"></p>
+  <p> Amount <input name="amount"></p>
+  <button>Convert</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block results %}
+
+<p>Converting <b>{{from_currency}}</b> to <b>{{to_currency}}</b> for the amount of <b>{{amount}}</b> will equal <b>{{results}}</b>.</p>
+
+<form action="/">
+  <button>Home</button>
+</form>
+
+{% endblock %}
