@@ -7,7 +7,7 @@
   <input type="text" name="first_name" value="{{ user.first_name }}"><br>
   <input type="text" name="last_name" value="{{ user.last_name }}"><br>
   <input type="url" name="image_url" value="{{ user.image_url }}"><br>
-  <button><a href="/users">Cancel</a></button>
+  <button><a href="/users/{{ user.id }}">Cancel</a></button>
   <button type="submit">Add</button>
 </form>
 

@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <p>Add Post</p>
 
 <form method="POST">
   <input type="text" name="title" placeholder="Enter a title"><br>
   <textarea type="text" name="content"></textarea><br>
 
+  {% for tag in tags %}
+  <input type="checkbox" value="{{ tag.id }}" name="tags">
+  <label for="tag_{{ tag.id }}">
+    {{ tag.name }}
+  </label>
+  {% endfor %}
+
+  <br>
+  <a href="/users/{{user.id}}">Cancel</a>
   <button type="submit">Add</button>
 </form>
 
