@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron d-flex justify-content-center"">
+    <p>Exercise Name: {{exercise.name}}</p>
+    <p>Exercise Type: {{exercise.type}}</p>
+    <p>Muscle Type: {{exercise.muscle}}</p>
+    <p>Equipment: {{exercise.equipment}}</p>
+    <p>Difficulty: {{exercise.diffculty}}</p>
+    <p>Instructions: {{exercise.instructions}}</p>
+</div>
+
+{% endblock %}

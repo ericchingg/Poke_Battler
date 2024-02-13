@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class=" jumbotron">
+    <h1>{{ workout.title }}!</h1>
+    <p class="lead">Created by: {{g.user.username}}</p>
+    <p>Description: {{ workout.description }}</p>
+    <p>Duration: {{ workout.duration }} mins</p>
+    <p>Reps: {{ workout.reps }}</p>
+</div>
+
+
+<div class="text-danger text-center">
+    Exercises in this Workout:
+    <ul>
+        {% for exercise in workout.exercises %}
+    <li><a href="/exercises/{{exercise.id}}">{{exercise.name}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<p>
+    <a class="btn btn-light" href="/workouts/{{ workout.id }}/add">
+        Add Exercise To Workout
+    </a>
+</p>
+
+<p>
+    <a class="btn btn-danger" href="/workouts/{{ workout.id }}/delete">
+        Delete Workout
+    </a>
+</p>
+
+{% endblock %}

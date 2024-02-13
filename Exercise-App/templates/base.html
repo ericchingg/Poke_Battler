@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise</title>
+
+  <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+  <script src="https://unpkg.com/jquery"></script>
+  <script src="https://unpkg.com/popper"></script>
+  <script src="https://unpkg.com/bootstrap"></script>
+
+  <!-- <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" href="/static/stylesheets/style.css"> -->
+</head>
+
+<body class="p-3 mb-2 bg-dark text-white">
+<nav class="navbar navbar-expand navbar-dark bg-dark, border border-light">
+  <div class="collapse navbar-collapse">
+    <div>
+      <a class="navbar-brand mb-0 h1" href="/">
+        <span>Exercise-App</span>
+      </a>
+    </div>
+    <ul class="nav justify-content-center">
+      {% if not g.user %}
+      <li class="nav-item"><a class="nav-link" href="/signup">Sign up</a></li>
+      <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="" class="card-link">
+          <p>{{ g.user.username }}</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/exercises">Exercises</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/search">Search</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="/workouts">My Workouts</a></li>
+      <li class="nav-item"><a class="nav-link" href="/workouts/new">New Workout</a></li>
+      <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{ category }}">{{ message }}</div>
+  {% endfor %}
+
+  {% block content %}
+  {% endblock %}
+
+</div>
+</body>
+</html>

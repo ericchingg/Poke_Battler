@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Add an exercise to {{ workout.title }}</h1>
+<div class="d-flex justify-content-center">
+  <form method="POST">
+    {{form.hidden_tag()}} 
+    {% for field in form if field.widget.input_type != 'hidden' %}
+
+    <div>
+        {{field.label}} 
+        {{field}}
+    </div>
+
+    {% endfor %}
+
+    <button class="btn btn-light" type="submit">Add</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-center">Exercises</h1>
+
+<div class="jumbotron d-flex justify-content-center"">
+    <ui>
+        {% for ex in exercises %}
+            <li><a href="/exercises/{{ex.id}}">{{ex.name}}</a></li>
+        {% endfor %}
+    </ui>
+</div>
+
+{% endblock %}

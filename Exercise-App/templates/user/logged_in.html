@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Workout of the Day!</h1> 
+
+  <div class="d-flex justify-content-center">
+    <p><a href="/exercises/{{rand_exercise.id}}">{{rand_exercise.name}}</a></p>
+  </div>
+{% endblock %}

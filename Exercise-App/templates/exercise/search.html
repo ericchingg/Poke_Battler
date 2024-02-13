@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Search</h1>
+
+<div class="jumbotron d-flex justify-content-center"">
+    <form method="POST" id="search_form">
+        {{ form.hidden_tag() }}
+      
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+            {{ field(placeholder=field.label.text, class="form-control") }}
+        {% endfor %}
+      
+        <button class="btn btn-light center" type="submit">Search</button>
+</div>
+
+<div class="jumbotron d-flex justify-content-center"">
+    <ul>
+        {% for res in resp %}
+        <li><a href="/exercises/{{res.id}}">{{res.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
