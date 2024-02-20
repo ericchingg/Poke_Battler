@@ -8,8 +8,8 @@
     {{form.hidden_tag()}} 
     {% for field in form if field.widget.input_type != 'hidden' %}
 
-    <div>
-        {{field.label}} 
+    <div class="d-flex justify-content-center">
+        {{field.label}}<br>
         {{field}}
     </div>
 

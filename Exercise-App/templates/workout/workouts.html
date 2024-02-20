@@ -4,15 +4,16 @@
 
 <h1 class="text-center">See all your Workouts!</h1>
 
-<div class="jumbotron d-flex justify-content-center"">
+<div class="jumbotron d-flex justify-content-center">
     <ul>
     {% for workout in workouts %}
         <li><a href="/workouts/{{workout.id}}">{{ workout.title }}</a></li>
     {% endfor %}
     </ul>
+</div>
 
-    <p><a class="btn btn-light" href="/workouts/new">Add a Workout</a></p>
-
+<div class="jumbotron d-flex justify-content-center">
+    <a id='button' class="btn btn-light" href="/workouts/new">Add a Workout</a>
 </div>
 
 {% endblock %}

@@ -3,6 +3,19 @@
 
 <h1 class="text-center">Exercises</h1>
 
+<div class="d-flex justify-content-center">
+    <a href="{{ url_for('show_exercises', filter='all') }}">All Exercises</a>
+    <a href="{{ url_for('show_exercises', filter='abdominals') }}">Abdominal</a>
+    <a href="{{ url_for('show_exercises', filter='biceps') }}">Biceps</a>
+    <a href="{{ url_for('show_exercises', filter='calves') }}">Calves</a>
+    <a href="{{ url_for('show_exercises', filter='chest') }}">Chest</a>
+    <a href="{{ url_for('show_exercises', filter='lats') }}">Lats</a>
+    <a href="{{ url_for('show_exercises', filter='lower_back') }}">Lower Back</a>
+    <a href="{{ url_for('show_exercises', filter='traps') }}">Traps </a>
+    <a href="{{ url_for('show_exercises', filter='triceps') }}">Triceps</a>
+</div>
+
+
 <div class="jumbotron d-flex justify-content-center"">
     <ui>
         {% for ex in exercises %}

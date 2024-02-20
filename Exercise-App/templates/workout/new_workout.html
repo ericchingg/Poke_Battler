@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1 class="text-center">Create your own Workout set now!</h1>
+<h1 class="text-center">Create a new Workout Set!</h1>
 
 <div class="d-flex justify-content-center">
     <form method="POST">
@@ -10,12 +10,12 @@
         {% for field in form if field.widget.input_type != 'hidden' %}
     
         <div>
-            {{field.label}} 
+            {{field.label}}<br>
             {{field}}
         </div>
     
         {% endfor %}
-    
+        <br>
         <button class="btn btn-light" type="submit">Add</button>
     </form>
 </div>
