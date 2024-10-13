@@ -2,7 +2,7 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import Alert from "./Alert.jsx";
 
-/** Login form for Jobly
+/** Login form for PbApp
  *
  * Props: handleLogin function
  * State: formData, errors
@@ -25,7 +25,7 @@ function LoginForm({ handleLogin }) {
     }));
   }
 
-  /** Sends formData to JoblyApp on form submission */
+  /** Sends formData to PbApp on form submission */
   async function handleSubmit(evt) {
     evt.preventDefault();
     try{
@@ -43,7 +43,7 @@ function LoginForm({ handleLogin }) {
       <form onSubmit={handleSubmit}>
 
         <div className="form-group row align-items-center mb-3">
-          <label for="username-input" className="col-sm-4 col-form-label">Username</label>
+          <label htmlFor="username-input" className="col-sm-4 col-form-label">Username</label>
           <div className="col-sm-8">
             <input
               type="text"
@@ -56,7 +56,7 @@ function LoginForm({ handleLogin }) {
         </div>
 
         <div className="form-group row align-items-center mb-3">
-          <label for="password-input" className="col-sm-4 col-form-label">Password</label>
+          <label htmlFor="password-input" className="col-sm-4 col-form-label">Password</label>
           <div className="col-sm-8">
             <input
               type="password"

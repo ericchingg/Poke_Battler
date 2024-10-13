@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "../nav/Navigation.jsx";
 import Homepage from "../home/Homepage.jsx";
 import TeamList from "../teams/TeamList.jsx";
@@ -39,7 +39,6 @@ function RoutesList({ currUser, handleLogin, handleLogout, handleSignup }) {
 
   return (
     <div>
-      <BrowserRouter>
         <Navigation currUser={currUser} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -87,7 +86,6 @@ function RoutesList({ currUser, handleLogin, handleLogout, handleSignup }) {
           {/* Catch-all route to redirect to homepage */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { v4 as uuid } from "uuid";
 import Alert from "./Alert.jsx";
 
-/** Signup form for Jobly
+/** Signup form for PbApp
  *
  * Props: handleSignup function, errors like ["message1", ...]
  * State: formData, errors

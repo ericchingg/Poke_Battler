@@ -48,7 +48,7 @@ function PokemonList() {
       {searchParam
         ? <h3>Results for '{searchParam}'</h3>
         : <h3>All Pokemon</h3>}
-      <div class='pokemon-list'>
+      <div className='pokemon-list'>
       <PokemonCardList pokemon={pokemon.data} />
       </div>  
     </div>

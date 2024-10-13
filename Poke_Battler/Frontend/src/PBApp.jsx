@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import  jwtDecode  from 'jwt-decode';
-
+import jwtDecode from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
 import RoutesList from './routes/Routes.jsx';
 import PokeApi from './api/api.jsx';
 import userContext from './userContext.js';
-
 
 /** Component for entire page.
  *
@@ -24,13 +22,13 @@ import userContext from './userContext.js';
 
 function PokeBattlerApp() {
   const [currUser, setCurrUser] = useState(null);
-
-  const savedToken = localStorage.getItem('token');
-  PokeApi.token = savedToken || '';
-  const [token, setToken] = useState(savedToken || '');
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   console.log("* PBApp");
+
+  PokeApi.token = token;
 
   /** Logs in a user with a valid username/password.
    *
@@ -38,40 +36,56 @@ function PokeBattlerApp() {
    * If login fails to authenticate, renders error message.
   */
   async function handleLogin({ username, password }) {
-
     const apiToken = await PokeApi.logInUser({ username, password });
+  
+    console.log("Received API Token:", apiToken); // Log the received token
 
     if (apiToken) {
-      setToken(apiToken);
       localStorage.setItem('token', apiToken);
-      setRedirect(true);
+      setToken(apiToken);
+
+      await fetchUserData(apiToken); // Call fetchUserData to get user data
+      
+      if (currUser) { // Check if currUser was successfully set
+        setRedirect(true);
+      }
+    } else {
+      console.error("Login failed: No token received."); // Handle case where no token is received
     }
   }
 
-  useEffect(function fetchUserDataOnLogin() {
-    async function fetchUserData() {
-      if (token !== "") {
-        const username = jwtDecode(token).username;
-        const userData = await PokeApi.getUserDetails(username);
+  async function fetchUserData(newToken) {
+    setLoading(true);
 
-        if (userData) {
-          setCurrUser({
-            username: username,
-            email: userData.email,
-          });
-        }
-      }
+    if (!newToken) {
+      console.error("No token available for decoding.");
+      setLoading(false);
+      return; // Early exit
     }
-    fetchUserData();
-  }, [token]);
 
+    try {
+      const decodedToken = jwtDecode(newToken);
+      const username = decodedToken.username;
+      const userData = await PokeApi.getUserDetails(username);
+
+      if (userData) {
+        setCurrUser({
+          username: username,
+          email: userData.email,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   /** Logs out current user by resetting states*/
   function handleLogout() {
     setCurrUser(null);
     setToken("");
     localStorage.clear();
-    setErrors([]);
   }
 
   /** Signs up a user when given valid input data
@@ -79,21 +93,30 @@ function PokeBattlerApp() {
    * Calls login function upon successful signup
    */
   async function handleSignup({ username, password, email }) {
-    const userData = {
-      username,
-      password,
-      email
-    };
-    const apiToken = await PokeApi.registerUser(userData);
-    setToken(apiToken);
-    localStorage.setItem('token', apiToken);
-
-    if (apiToken) {
+    try {
+      const userData = {
+        username,
+        password,
+        email,
+      };
+      const apiToken = await PokeApi.registerUser(userData);
+      setToken(apiToken);
+      localStorage.setItem('token', apiToken);
+      await fetchUserData(apiToken); // Fetch user data upon signup
       setRedirect(true);
+    } catch (error) {
+      console.error("Signup error:", error);
+      // Handle signup errors (optional)
     }
   }
 
-  if (token && !currUser) {
+  useEffect(() => {
+    if (token) {
+      fetchUserData(token);
+    }
+  }, [token]);
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
@@ -102,7 +125,7 @@ function PokeBattlerApp() {
   }
 
   return (
-    <div className="PokeBatlerApp">
+    <div className="PokeBattlerApp">
       <userContext.Provider value={{ user: currUser }}>
         <RoutesList
           currUser={currUser}

@@ -53,17 +53,17 @@ router.post('/register', async function(req, res, next) {
  *
  */
 
-router.post('/login', async function(req, res, next) {
-  try {
-    const { username, password } = req.body;
+// router.post('/login', async function(req, res, next) {
+//   try {
+//     const { username, password } = req.body;
 
-    let user = await User.authenticate(username, password);
+//     let user = await User.authenticate(username, password);
 
-    const token = createToken(username);
-    return res.json({ token });
-  } catch (err) {
-    return next(err);
-  }
-}); // end
+//     const token = createToken(username);
+//     return res.json({ token });
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
 
 module.exports = router;
