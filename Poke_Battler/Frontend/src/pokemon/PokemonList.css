@@ -1,0 +1,6 @@
+.pokemon-list {
+  height: 80vh; /* Adjust the height as needed */
+  overflow-y: auto; /* This enables vertical scrolling */
+  padding: 10px;
+  border: 1px solid #ccc; /* Optional: add a border for clarity */
+}
