@@ -43,7 +43,7 @@ class Pokemon {
     const pokemon = result.rows[0];
 
     if (!pokemon) {
-      throw new ExpressError('No such pokemon', 404);
+      throw new ExpressError(`No such pokemon found`, 404);
     }
 
     return pokemon;
@@ -52,20 +52,20 @@ class Pokemon {
   static async getMovesForPokemon(id) {
     const res = await db.query(
       `SELECT moves.id, moves.name, moves.type, moves.damage, moves.accuracy 
-      FROM pokemoves 
-      JOIN moves ON pokemoves.moves_id = moves.id 
-      WHERE pokemoves.poke_id = $1`,
+       FROM pokemoves 
+       JOIN moves ON pokemoves.moves_id = moves.id 
+       WHERE pokemoves.poke_id = $1`,
       [id]
     );
-
+  
     console.log("Moves found:", res.rows);
-    const move = res.rows[0];
-
-    if (!move || move.length === 0) {
-      new ExpressError('No such move', 404);
+  
+    // Check if there are any moves found
+    if (res.rows.length === 0) {
+      throw new ExpressError('No moves found for this Pokémon', 404);
     }
-
-    return move;
+  
+    return res.rows; // Return all moves instead of just the first one
   }
 
 }

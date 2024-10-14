@@ -11,21 +11,23 @@
   gap: 20px; /* Space between Pokémon */
 }
 
-.pokemon {
+/* Adjust the margin for each Pokémon */
+.my-pokemon {
+  margin-top: 50px; /* Adjust this value to lower your Pokémon */
+  margin-right: 20px;
   text-align: center; /* Center text for Pokémon details */
   border: 1px solid #000000; /* Border for Pokémon */
   border-radius: 8px; /* Rounded corners */
   padding: 10px; /* Inner spacing */
-  background-color: #000000; /* background */
+  background-color: #aaa1ed; /* background */
 }
 
-/* Adjust the margin for each Pokémon */
-.my-pokemon {
-  margin-top: 30px; /* Adjust this value to lower your Pokémon */
-  margin-right: 30px;
-}
-
-.opponent-pokemon {
-  margin-bottom: 20px; /* Adjust this value to raise the opponent Pokémon */
+.opp-pokemon {
+  margin-bottom: 300px; /* Adjust this value to raise the opponent Pokémon */
   margin-left: 20px;
+  text-align: center; /* Center text for Pokémon details */
+  border: 1px solid #000000; /* Border for Pokémon */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Inner spacing */
+  background-color: #e79c9c; /* background */
 }

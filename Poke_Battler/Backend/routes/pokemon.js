@@ -3,7 +3,7 @@
 const Pokemon = require('../models/pokemon');
 const express = require('express');
 const router = new express.Router();
-const {ExpressError} = require('../expressError');
+const { ExpressError } = require('../expressError');
 const { authenticateJWT } = require('../middleware/auth');
 
 /** GET /
@@ -51,7 +51,10 @@ router.get('/:id/moves', authenticateJWT, async function(
   next
 ) {
   try {
-    let moves = await Pokemon.getMovesForPokemon(req.params.id);
+    // const pokemon = await Pokemon.get(req.params.name);
+    // const moves = await Pokemon.getMovesForPokemon(pokemon.id);
+
+    const moves = await Pokemon.getMovesForPokemon(req.params.id);
     console.log(moves);
     if (!moves || moves.length === 0) {
       throw new ExpressError('Move not found.', 404);

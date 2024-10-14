@@ -7,17 +7,17 @@
 }
 
 .battle-log {
-  position: fixed;
+  position: right;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   overflow-y: auto;
-  max-height: 200px; /* Limit height to prevent taking over the whole screen */
+  max-height: 500px; /* Limit height to prevent taking over the whole screen */
 }
 
 .battle-log ul {

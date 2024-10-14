@@ -32,7 +32,7 @@ function PokemonList() {
     fetchPokemon();
   }, [searchParam]);
 
-  /** Update job and search parameter state when
+  /** Update pokemon and search parameter state when
    *  a new parameter is received
    */
   function onPokemonSearch(searchParam) {
