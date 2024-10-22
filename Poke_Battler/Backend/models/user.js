@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const db = require('../db');
-const ExpressError = require('../expressError');
+const { ExpressError } = require('../expressError');
 // const sqlForPartialUpdate = require('../helpers/partialUpdate');
 const { BCRYPT_WORK_FACTOR } = require("../config");
 
@@ -29,7 +29,7 @@ class User {
       `INSERT INTO users 
           (username, email, password) 
         VALUES ($1, $2, $3) 
-        RETURNING username, email, password`,
+        RETURNING username, email`,
       [
         username,
         email,
@@ -37,6 +37,7 @@ class User {
       ]
     );
 
+    console.log("Registered user:", result.rows[0]); // Log the result
     return result.rows[0];
   }
 
@@ -58,12 +59,18 @@ class User {
     );
 
     const user = result.rows[0];
+    console.log("Query Result (auth):", user);
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      return user;
-    } else {
-      throw new ExpressError('Cannot authenticate', 401);
+    if (user) {
+      // compare hashed password to a new hash from password
+      const isValid = await bcrypt.compare(password, user.password);
+      if (isValid) {
+        delete user.password;
+        return user;
+      }
     }
+
+    throw new ExpressError("Invalid username/password");
   }
 
   /** Returns user info: {username, first_name, last_name, email, phone}
@@ -81,10 +88,12 @@ class User {
       [username]
     );
 
+    console.log("Query result (get):", result.rows);
+
     const user = result.rows[0];
 
     if (!user) {
-      new ExpressError('No such user', 404);
+      throw new ExpressError('No such user', 404);
     }
 
     return user;
@@ -122,7 +131,7 @@ class User {
    *
    **/
 
-  static async delete(username) {
+  static async remove(username) {
     const result = await db.query(
       'DELETE FROM users WHERE username = $1 RETURNING username',
       [username]

@@ -5,11 +5,7 @@ import "./Navigation.css";
  *
  * Props: currUser => {
  *                      username,
- *                      firstName,
- *                      lastName,
- *                      isAdmin,
- *                      email,
- *                      applications: [jobID, ...]
+ *                      email
  *                    }
  *        handleLogout
  *

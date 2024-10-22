@@ -4,7 +4,7 @@ const Pokemon = require('../models/pokemon');
 const express = require('express');
 const router = new express.Router();
 const { ExpressError } = require('../expressError');
-const { authenticateJWT } = require('../middleware/auth');
+// const { authenticateJWT } = require('../middleware/auth');
 
 /** GET /
  *
@@ -13,7 +13,7 @@ const { authenticateJWT } = require('../middleware/auth');
  *
  */
 
-router.get('/', authenticateJWT, async function(req, res, next) {
+router.get('/',  async function(req, res, next) {
   try {
     let pokemonList = await Pokemon.getAll();
     return res.json({ pokemon: pokemonList });
@@ -32,7 +32,7 @@ router.get('/', authenticateJWT, async function(req, res, next) {
  */
 
 // added error handler for missing user.
-router.get('/:id', authenticateJWT, async function(
+router.get('/:id',  async function(
   req,
   res,
   next
@@ -45,14 +45,12 @@ router.get('/:id', authenticateJWT, async function(
   }
 });
 
-router.get('/:id/moves', authenticateJWT, async function(
+router.get('/:id/moves',  async function(
   req,
   res,
   next
 ) {
   try {
-    // const pokemon = await Pokemon.get(req.params.name);
-    // const moves = await Pokemon.getMovesForPokemon(pokemon.id);
 
     const moves = await Pokemon.getMovesForPokemon(req.params.id);
     console.log(moves);

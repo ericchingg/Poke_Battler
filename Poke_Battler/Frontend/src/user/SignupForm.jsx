@@ -49,7 +49,7 @@ function SignupForm({ handleSignup }) {
       <form onSubmit={handleSubmit}>
 
         <div className="form-group row align-items-center mb-3">
-          <label for="username-input" className="col-sm-4 col-form-label">Username</label>
+          <label htmlFor="username-input" className="col-sm-4 col-form-label">Username</label>
           <div className="col-sm-8">
             <input
               type="text"
@@ -62,7 +62,7 @@ function SignupForm({ handleSignup }) {
         </div>
 
         <div className="form-group row align-items-center mb-3">
-          <label for="password-input" className="col-sm-4 col-form-label">Password</label>
+          <label htmlFor="password-input" className="col-sm-4 col-form-label">Password</label>
           <div className="col-sm-8">
             <input
               type="password"
@@ -75,7 +75,7 @@ function SignupForm({ handleSignup }) {
         </div>
 
         <div className="form-group row align-items-center mb-3">
-          <label for="email-input" className="col-sm-4 col-form-label">Email</label>
+          <label htmlFor="email-input" className="col-sm-4 col-form-label">Email</label>
           <div className="col-sm-8">
             <input
               id="email-input"

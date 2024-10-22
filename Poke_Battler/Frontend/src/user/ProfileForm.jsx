@@ -1,7 +1,10 @@
 import { useState , useEffect } from "react";
-import { Link } from 'react-router-dom';
-import { v4 as uuid } from "uuid";
+// import { Link } from 'react-router-dom';
+// import { v4 as uuid } from "uuid";
 import Alert from "./Alert.jsx";
+// import User from "../../../Backend/models/user.js";
+import PokeApi from "../api/api.jsx";
+import { Navigate } from "react-router-dom";
 
 /** Profile form for editing user information
  *
@@ -51,6 +54,18 @@ function ProfileForm({ handleProfileUpdate, currentUser }) {
       setErrors(errs);
     }
   }
+
+  async function handleDelete() {
+    try { 
+      const deletedUser = await PokeApi.deleteUser(formData.username);
+      alert(`User ${deletedUser} has been deleted.`);
+      localStorage.removeItem('token');
+      window.location.reload()
+    } catch (errs) {
+      setErrors(errs);
+    }
+  }
+
 
   return (
     <div className="ProfileForm">
@@ -105,7 +120,7 @@ function ProfileForm({ handleProfileUpdate, currentUser }) {
         </div>
 
         <button type="submit" className="btn btn-dark">Save Changes</button>
-
+        <button type="button" className="btn btn-danger" onClick={handleDelete}>Delete Account</button>
         {errors.length > 0 && <Alert messageStyle="alert alert-danger" messages={errors} />}
       </form>
     </div>

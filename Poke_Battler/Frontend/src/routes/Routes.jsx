@@ -58,7 +58,7 @@ function RoutesList({ currUser, handleLogin, handleLogout, handleSignup }) {
           {/* Routes for logged-in users */}
           <Route path="/profile" element={
             <ProtectedRoute>
-              <ProfileForm />
+              <ProfileForm currentUser={currUser}/>
             </ProtectedRoute>
           } />
           <Route path="/teams" element={

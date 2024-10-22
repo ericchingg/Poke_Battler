@@ -4,7 +4,7 @@ const Team = require('../models/team');
 const express = require('express');
 const router = new express.Router();
 const {ExpressError} = require('../expressError');
-const { authenticateJWT } = require('../middleware/auth');
+// const { authenticateJWT } = require('../middleware/auth');
 
 /** GET /
  *
@@ -12,7 +12,7 @@ const { authenticateJWT } = require('../middleware/auth');
  *
  */
 
-router.get('/', authenticateJWT, async function(req, res, next) {
+router.get('/',  async function(req, res, next) {
   try {
     let teamList = await Team.getAll();
     return res.json({ team: teamList });
@@ -25,7 +25,7 @@ router.get('/', authenticateJWT, async function(req, res, next) {
  *
  */
 
-router.post("/", authenticateJWT, async function (req, res, next) {
+router.post("/",  async function (req, res, next) {
   try {
 
     const team = await Team.create(req.body);
@@ -44,7 +44,7 @@ router.post("/", authenticateJWT, async function (req, res, next) {
  */
 
 
-router.get('/:id', authenticateJWT, async function(
+router.get('/:id',  async function(
   req,
   res,
   next
@@ -66,7 +66,7 @@ router.get('/:id', authenticateJWT, async function(
  * Authorization required: admin
  */
 
-router.delete("/:id", authenticateJWT, async function (req, res, next) {
+router.delete("/:id",  async function (req, res, next) {
   try {
     await Team.delete(req.params.id);
     return res.json({ deleted: +req.params.id });
